@@ -1,0 +1,59 @@
+package main
+import "fmt"
+ func main(){
+	fmt.Println("To Do list")
+	todo :=[]string{}
+	var action string
+	var err error
+	var task string
+	var err2 error
+for{	fmt.Println("Enter the action(add/ delete/list)")
+	_,err=fmt.Scanln(&action)
+	fmt.Println("Enter the task (if list type no)")
+	_,err2=fmt.Scanln(&task)
+	if action=="add"{
+		addTodo(task,&todo)
+		fmt.Println("Added Successfully")
+	}else if action=="delete"{
+		 deleteTodo(task,&todo)
+		fmt.Println("Deleted successfully")
+	}else if action=="list" {
+		fmt.Println("List")
+		 listTodo(&todo);
+	}else if err!=nil{
+		fmt.Println("Error(main)")
+		break;
+	}else if err2!=nil{
+		fmt.Println("Error from getting task")
+	}else if action=="end"{
+			break;
+	}else{
+		fmt.Println("Invalid")
+		break
+	}
+}
+
+ }
+ func addTodo(task string,todo *[]string){
+   *todo=append(*todo,task)
+ }
+ func deleteTodo(task string,todo *[]string){
+	var ind =-1
+	
+	for i:=0;i<len(*todo);i++{
+	if((*todo)[i]==task){
+	 ind=i
+	 break
+	}}
+	if ind==-1{ 
+	fmt.Println("Task not found")
+	}else{
+	*todo=append((*todo)[:ind],(*todo)[ind+1:]...)
+	}
+	
+ }
+ func listTodo(todo *[]string){
+   for index, value:=range *todo {
+	fmt.Println( index+1,".",value)
+   }
+ }
